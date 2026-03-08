@@ -1,0 +1,124 @@
+# Roadmap de LicitIA 🗺️
+
+Este documento describe el plan de desarrollo del proyecto **LicitIA**, desde el prototipo inicial hasta una solución escalable y robusta. Las fechas son estimadas y pueden ajustarse según el progreso real.
+
+---
+
+## 📅 Visión general
+
+| Fase | Nombre | Duración estimada | Estado |
+|------|--------|-------------------|--------|
+| 1 | MVP (Extracción y alertas) | 3 semanas | En curso |
+| 2 | Inteligencia artificial (clasificación) | 2 semanas | Pendiente |
+| 3 | Generación de propuestas | 3 semanas | Pendiente |
+| 4 | Escalamiento y optimización | Continuo | Pendiente |
+
+---
+
+## 🚀 Fase 1 – MVP (Mínimo Producto Viable)
+
+**Objetivo:** Tener un sistema funcional que extraiga licitaciones de fuentes públicas, las almacene y notifique al equipo.
+
+### Tareas
+
+- [x] Configurar **Firecrawl** en n8n para extraer datos del portal DGCP y MIDEREC.
+- [x] Definir campos clave a extraer: número de expediente, objeto, institución, fecha límite, monto (si disponible), enlace al pliego.
+- [x] Crear base de datos en **Supabase** con tabla `licitaciones`.
+- [x] Almacenar automáticamente cada nueva licitación en Supabase.
+- [x] Programar ejecuciones diarias (mañana y tarde) para mantener la base actualizada.
+- [ ] Configurar alertas por **email** para nuevas licitaciones que cumplan criterios básicos (palabras clave, monto mínimo, etc.).
+- [ ] Desarrollar un **dashboard simple** con Hostinger Horizons que muestre las últimas licitaciones y permita filtrarlas.
+
+### Criterios de éxito
+
+- Se extraen al menos 20 licitaciones por semana sin errores.
+- Las alertas llegan en menos de 5 minutos tras la detección.
+- El dashboard carga correctamente y muestra los datos en tiempo real.
+
+---
+
+## 🤖 Fase 2 – Inteligencia artificial (clasificación y enriquecimiento)
+
+**Objetivo:** Añadir una capa de análisis automático que clasifique las licitaciones y extraiga información clave de los pliegos.
+
+### Tareas
+
+- [ ] Integrar **API de OpenAI** (o Claude) en n8n.
+- [ ] Crear un flujo que, ante una nueva licitación, descargue el pliego (PDF) y lo procese con IA para:
+  - Clasificar por sector (construcción, servicios, suministros, etc.).
+  - Extraer requisitos específicos (garantías, experiencia previa, certificaciones).
+  - Identificar fechas clave (presentación de preguntas, apertura, etc.).
+- [ ] Actualizar la tabla `licitaciones` con los campos enriquecidos.
+- [ ] Implementar un sistema de **scoring** que asigne una puntuación de afinidad según el perfil del proveedor.
+- [ ] Mejorar las alertas para incluir la clasificación y el score en el mensaje.
+
+### Criterios de éxito
+
+- La IA clasifica correctamente al menos el 80% de las licitaciones (validación manual).
+- Se extraen al menos 3 requisitos clave por licitación.
+- El scoring ayuda a priorizar oportunidades relevantes.
+
+---
+
+## 📝 Fase 3 – Generación automática de propuestas
+
+**Objetivo:** Reducir drásticamente el tiempo de preparación de ofertas mediante la generación asistida por IA de los sobres A (técnico) y B (económico).
+
+### Tareas
+
+- [ ] Diseñar **plantillas** para Sobre A y Sobre B en formato Word/PDF.
+- [ ] Crear un flujo en n8n que, a partir de una licitación seleccionada y los datos del proveedor (guardados en Supabase), genere automáticamente:
+  - **Sobre A**: Descripción técnica, experiencia, metodología, equipo, etc.
+  - **Sobre B**: Cuadro de precios, totales, condiciones de pago.
+- [ ] Incluir un **checklist de validación** que verifique que todos los documentos requeridos están presentes (RNC, certificaciones, garantías, etc.).
+- [ ] Habilitar la descarga de los borradores desde el dashboard.
+- [ ] Probar con un **cliente piloto** real para ajustar la calidad de las propuestas.
+
+### Criterios de éxito
+
+- Se genera una propuesta completa en menos de 5 minutos.
+- El cliente piloto adjudica al menos una licitación con nuestra ayuda.
+- Feedback positivo sobre la calidad y precisión de los textos generados.
+
+---
+
+## 📈 Fase 4 – Escalamiento y optimización
+
+**Objetivo:** Multiplicar el valor del sistema añadiendo más fuentes, más clientes, y funcionalidades avanzadas.
+
+### Tareas
+
+- [ ] Incorporar nuevos portales de licitación (MOPC, Salud Pública, Ayuntamientos, etc.).
+- [ ] Permitir la gestión de **múltiples perfiles de proveedor** (cada uno con sus características, rubros y preferencias).
+- [ ] Desarrollar un **panel de seguimiento de comisiones** que calcule automáticamente los ingresos por cada contrato ganado.
+- [ ] Integrar con **WhatsApp Business API** para notificaciones más directas.
+- [ ] Añadir un **módulo de análisis** con gráficos: evolución de oportunidades, tasa de éxito, comisiones proyectadas.
+- [ ] Explorar integraciones con plataformas como Ariba, Oracle Procurement, etc. (cuando ofrezcan APIs públicas).
+- [ ] Automatizar la **facturación** y el envío de informes mensuales a los clientes.
+
+### Criterios de éxito
+
+- El sistema maneja sin problemas más de 500 licitaciones activas.
+- Se incorporan al menos 5 clientes activos con perfiles diferenciados.
+- La tasa de adjudicación de propuestas generadas con LicitIA supera el 30%.
+
+---
+
+## 🧪 Experimentos futuros (ideas)
+
+- **Chatbot de consultas**: Un asistente que responda dudas sobre licitaciones en curso.
+- **Análisis predictivo**: ¿Qué licitaciones tienen más probabilidad de ser adjudicadas?
+- **Automatización del envío**: Subir la propuesta directamente al portal correspondiente (cuando sea técnicamente posible).
+- **Colaboración en tiempo real**: Varios usuarios del mismo proveedor trabajando sobre la misma propuesta.
+
+---
+
+## 📌 Notas importantes
+
+- El roadmap puede adaptarse según los resultados de cada fase.
+- Priorizamos siempre la **validación con usuarios reales** antes de añadir complejidad.
+- Toda la documentación y el código se mantendrán actualizados en este repositorio.
+
+---
+
+**Última actualización:** 8 de marzo de 2026
