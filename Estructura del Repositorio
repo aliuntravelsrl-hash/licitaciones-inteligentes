@@ -1,0 +1,28 @@
+licitaciones-inteligentes/
+├── README.md
+├── LICENSE
+├── .gitignore
+├── docs/
+│   ├── roadmap.md
+│   ├── plan_negocio.md
+│   ├── arquitectura.md
+│   └── manual_usuario.md
+├── backend/
+│   ├── n8n/
+│   │   ├── workflows/           # Exportaciones JSON de workflows
+│   │   └── funciones/            # Scripts personalizados (Python/JS)
+│   ├── api/                       # Si creamos API propia
+│   └── requirements.txt
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+├── database/
+│   ├── schema.sql                 # Esquema de Supabase
+│   └── migrations/
+├── scrapers/
+│   ├── firecrawl/
+│   │   └── configuraciones.yaml
+│   └── portales.txt
+└── scripts/
+    └── deploy.sh                   # Script de despliegue
